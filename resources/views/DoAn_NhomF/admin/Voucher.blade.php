@@ -28,7 +28,7 @@
                 <div class="widget-box">
                     <div class="widget-title">
                         <span class="icon">
-                            <a href="{{route('admin.from_add_user')}}">
+                            <a href="{{route('admin.from_add_voucher')}}">
                                 <i class="icon-plus"></i>
                             </a>
                         </span>

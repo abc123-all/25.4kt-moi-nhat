@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Product;
 use App\Models\Users;
 use App\Models\Voucher;
@@ -10,32 +11,39 @@ use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
-    public function indexadmin(){
+    public function indexadmin()
+    {
         return view('DoAN_nhomF.admin.index');
     }
-    public function itemadmin(){
+    public function itemadmin()
+    {
         $products = Product::paginate(4);
         return view('DoAN_nhomF.admin.items', compact('products'));
     }
-    public function resultadmin(){
-        
+    public function resultadmin()
+    {
+
         return view('DoAN_nhomF.admin.result');
     }
-    public function revenuetadmin(){
-        
+    public function revenuetadmin()
+    {
+
         return view('DoAN_nhomF.admin.revenue');
     }
-// voucher
-    public function voucheradmin(){
-        $vouchers=Voucher::all();
-        $vouchers=Voucher::paginate(1);
-        return view('DoAn_NhomF.admin.Voucher',compact('vouchers'));
+    // voucher
+    public function voucheradmin()
+    {
+        $vouchers = Voucher::all();
+        $vouchers = Voucher::paginate(1);
+        return view('DoAn_NhomF.admin.Voucher', compact('vouchers'));
     }
-    
-    public function sidebaradmin(){
+
+    public function sidebaradmin()
+    {
         return view('DoAN_nhomF.admin.sidebar');
     }
-    public function usersadmin(Request $request){
+    public function usersadmin(Request $request)
+    {
         // $users = Users::all();
         // $users = Users::paginate(2);
         // return view('DoAN_nhomF.admin.users',compact('users'));
@@ -43,34 +51,65 @@ class AdminController extends Controller
         // Nếu không có query, cho danh sách rỗng
         if ($keyword) {
             $users = Users::where('name', 'LIKE', "%$keyword%")
-                             ->paginate(3)
-                             ->appends(['keyword' => $keyword]);
+                ->paginate(3)
+                ->appends(['keyword' => $keyword]);
         } else {
             $users = Users::all();
             $users = Users::paginate(2);
         }
-        return view('DoAN_nhomF.admin.users',compact('users','keyword'));
+        return view('DoAN_nhomF.admin.users', compact('users', 'keyword'));
     }
 
-    public function footeradmin(){
+    public function footeradmin()
+    {
         return view('DoAN_nhomF.admin.footer');
     }
-    public function headeradmin(){
+    public function headeradmin()
+    {
         return view('DoAN_nhomF.admin.header');
     }
-    public function categoriesadmin(){
-        
+    public function categoriesadmin()
+    {
+
         return view('DoAN_nhomF.admin.categories');
     }
-    public function from_add_user(){
-        
+    public function from_add_user()
+    {
+
         return view('DoAN_nhomF.admin.from_add_user');
     }
-    public function from_update_user(Request $request){
+    // them voucher
+    public function from_add_voucher()
+    {
+
+        return view('DoAN_nhomF.admin.from_add_voucher');
+    }
+    public function post_from_add_voucher(Request $request)
+    {
+        $request->validate([
+            'code' => 'required|string|max:50|unique:voucher',
+            'description' => 'required|string|max:100',
+            'discount_type' => 'nullable|string|max:15',
+            'discount_value' => 'nullable|numeric|max:255',
+            'status' => 'required|in:0,1', // 0 = còn hiệu lực, 1 = hết hiệu lực
+        ]);
+        $data = $request->all();
+        $check = Voucher::create([
+            'code' => $data['code'],
+            'description' => $data['description'],
+            'discount_type' => $data['discount_type'],
+            'discount_value' => $data['discount_value'],
+            'status' => $data['status'],
+        ]);
+        return redirect("voucheradmin");
+    }
+
+    public function from_update_user(Request $request)
+    {
         $user_id = $request->get('user_id');
         $user = Users::find($user_id);
 
-        return view('DoAN_nhomF.admin.from_update_user',['user' => $user]);
+        return view('DoAN_nhomF.admin.from_update_user', ['user' => $user]);
     }
     public function post_from_update_user(Request $request)
     {
@@ -103,7 +142,8 @@ class AdminController extends Controller
 
         return redirect('usersadmin')->with('success', 'Cập nhật người dùng thành công.');
     }
-    public function post_from_add_user(Request $request){
+    public function post_from_add_user(Request $request)
+    {
         $request->validate([
             'name' => 'required|string|max:50',
             'email' => 'required|email|max:100|unique:user',
@@ -114,20 +154,20 @@ class AdminController extends Controller
         ]);
         $data = $request->all();
         $check = Users::create([
-        'name' => $data['name'],
-        'email' => $data['email'],
-        'phone' => $data['phone'],
-        'address' => $data['address'],
-        'password' => Hash::make($data['password']),
-        'role' => $data['role'],
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'phone' => $data['phone'],
+            'address' => $data['address'],
+            'password' => Hash::make($data['password']),
+            'role' => $data['role'],
         ]);
         return redirect("usersadmin");
     }
-    public function deleteUser(Request $request) {
+    public function deleteUser(Request $request)
+    {
         $user_id = $request->get('user_id');
         $user = Users::destroy($user_id);
 
         return redirect("usersadmin")->withSuccess('You have signed-in');
     }
-
-}   
+}

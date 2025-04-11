@@ -43,6 +43,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
 Route::get('voucheradmin', [AdminController::class, 'voucheradmin'])->name('voucheradmin');
 
+Route::get('from_add_voucher', [AdminController::class, 'from_add_voucher'])->name('from_add_voucher');
+Route::post('from_add_voucher', [AdminController::class, 'post_from_add_voucher'])->name('post_from_add_voucher');
+
 
 });
 // Admin
@@ -74,6 +77,8 @@ Route::get('revenuetadmin', [AdminController::class, 'revenuetadmin'])->name('re
 
 // voucheradmin
 Route::get('voucheradmin', [AdminController::class, 'voucheradmin'])->name('voucheradmin');
+Route::get('from_add_voucher', [AdminController::class, 'from_add_voucher'])->name('from_add_voucher');
+Route::post('from_add_voucher', [AdminController::class, 'post_from_add_voucher'])->name('post_from_add_voucher');
 
 //
 Route::get('dashboard', [CrudUserController::class, 'dashboard']);
