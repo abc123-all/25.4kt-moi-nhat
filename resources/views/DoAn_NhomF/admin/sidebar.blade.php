@@ -33,7 +33,7 @@
             </a>
         </li>
         <li>
-            <a href="{{ route('admin.revenuetadmin') }}">
+            <a href="{{ route('admin.voucheradmin') }}">
                 <i class="icon icon-th-list"></i>
                 <span>Voucher</span>
             </a>

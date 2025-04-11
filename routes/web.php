@@ -41,6 +41,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
     Route::get('resultadmin', [AdminController::class, 'resultadmin'])->name('resultadmin');
 
+Route::get('voucheradmin', [AdminController::class, 'voucheradmin'])->name('voucheradmin');
+
+
 });
 // Admin
 Route::get('indexadmin', [AdminController::class, 'indexadmin'])->name('indexadmin');
@@ -69,6 +72,8 @@ Route::get('deleteUser', [AdminController::class, 'deleteUser'])->name('deleteUs
 
 Route::get('revenuetadmin', [AdminController::class, 'revenuetadmin'])->name('revenuetadmin');
 
+// voucheradmin
+Route::get('voucheradmin', [AdminController::class, 'voucheradmin'])->name('voucheradmin');
 
 //
 Route::get('dashboard', [CrudUserController::class, 'dashboard']);

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Models\Users;
+use App\Models\Voucher;
 use Hash;
 use Session;
 use Illuminate\Http\Request;
@@ -23,6 +24,12 @@ class AdminController extends Controller
     public function revenuetadmin(){
         
         return view('DoAN_nhomF.admin.revenue');
+    }
+// voucher
+    public function voucheradmin(){
+        $vouchers=Voucher::all();
+        $vouchers=Voucher::paginate(1);
+        return view('DoAn_NhomF.admin.Voucher',compact('vouchers'));
     }
     
     public function sidebaradmin(){

@@ -17,6 +17,7 @@ class ClearOldDataSeeder extends Seeder
         DB::table('manufactures')->delete();
         DB::table('users')->delete();
         DB::table('user')->delete();
+        DB::table('vouchers')->delete();
         // Các bảng khác có thể xóa tại đây
         
         // Bật lại các ràng buộc khóa ngoại

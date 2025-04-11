@@ -10,6 +10,8 @@ use App\Models\Users;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
+use Database\Seeders\VoucherSeeder;
+
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -17,6 +19,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        $this->call([
+            VoucherSeeder::class,
+        ]);
         // User::factory(10)->create();
         
         Users::create([
@@ -114,5 +119,7 @@ class DatabaseSeeder extends Seeder
             ]);
         }
     }
+    // // ✅ Gọi seeder cho bảng vouchers
+    // $this->call(VoucherSeeder::class);
     }
 }
