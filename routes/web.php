@@ -46,6 +46,11 @@ Route::get('voucheradmin', [AdminController::class, 'voucheradmin'])->name('vouc
 Route::get('from_add_voucher', [AdminController::class, 'from_add_voucher'])->name('from_add_voucher');
 Route::post('from_add_voucher', [AdminController::class, 'post_from_add_voucher'])->name('post_from_add_voucher');
 
+Route::get('from_update_voucher', [AdminController::class, 'from_update_voucher'])->name('from_update_voucher');
+Route::post('from_update_voucher', [AdminController::class, 'post_from_update_voucher'])->name('post_from_update_voucher');
+
+Route::get('deleteVoucher', [AdminController::class, 'deleteVoucher'])->name('deleteVoucher');
+
 
 });
 // Admin
@@ -79,6 +84,12 @@ Route::get('revenuetadmin', [AdminController::class, 'revenuetadmin'])->name('re
 Route::get('voucheradmin', [AdminController::class, 'voucheradmin'])->name('voucheradmin');
 Route::get('from_add_voucher', [AdminController::class, 'from_add_voucher'])->name('from_add_voucher');
 Route::post('from_add_voucher', [AdminController::class, 'post_from_add_voucher'])->name('post_from_add_voucher');
+
+Route::get('from_update_voucher', [AdminController::class, 'from_update_voucher'])->name('from_update_voucher');
+Route::post('from_update_voucher', [AdminController::class, 'post_from_update_voucher'])->name('post_from_update_voucher');
+
+Route::get('deleteVoucher', [AdminController::class, 'deleteVoucher'])->name('deleteVoucher');
+
 
 //
 Route::get('dashboard', [CrudUserController::class, 'dashboard']);

@@ -8,7 +8,7 @@ class Voucher extends Model
 {
     // Tên bảng nếu không phải dạng số nhiều của model (Laravel sẽ đoán là `vouchers` mặc định)
     protected $table = 'vouchers';
-
+    protected $primaryKey = 'voucher_id';
     // Các cột được phép gán giá trị tự động (mass assignable)
     protected $fillable = [
         'code',

@@ -87,11 +87,16 @@ class AdminController extends Controller
     public function post_from_add_voucher(Request $request)
     {
         $request->validate([
-            'code' => 'required|string|max:50|unique:voucher',
-            'description' => 'required|string|max:100',
-            'discount_type' => 'nullable|string|max:15',
-            'discount_value' => 'nullable|numeric|max:255',
-            'status' => 'required|in:0,1', // 0 = còn hiệu lực, 1 = hết hiệu lực
+            'code' => 'required|unique:vouchers,code',
+            'description' => 'required',
+            'discount_type' => 'required|in:percent,fixed',
+            'discount_value' => 'required|numeric|min:0',
+            'max_discount' => 'nullable|numeric|min:0',
+            'min_order_value' => 'nullable|numeric|min:0',
+            'quantity' => 'required|integer|min:0',
+            'start_date' => 'required|date',
+            'end_date' => 'required|date|after_or_equal:start_date',
+            'status' => 'required|in:0,1',
         ]);
         $data = $request->all();
         $check = Voucher::create([
@@ -99,11 +104,71 @@ class AdminController extends Controller
             'description' => $data['description'],
             'discount_type' => $data['discount_type'],
             'discount_value' => $data['discount_value'],
+            'max_discount' => $data['max_discount'],
+            'min_order_value' => $data['min_order_value'],
+            'quantity' => $data['quantity'],
+            'start_date' => $data['start_date'],
+            'end_date' => $data['end_date'],
             'status' => $data['status'],
         ]);
         return redirect("voucheradmin");
     }
 
+    // voucher
+    public function from_update_voucher(Request $request)
+    {
+        $voucher_id = $request->get('voucher_id');
+        $voucher = Voucher::find($voucher_id);
+
+        return view('DoAN_nhomF.admin.from_update_voucher', ['voucher' => $voucher]);
+    }
+
+    public function post_from_update_voucher(Request $request)
+    {
+        $input = $request->all();
+
+        // Validate dữ liệu đầu vào
+        $request->validate([
+            'code' => 'required|unique:vouchers,code',
+            'description' => 'required',
+            'discount_type' => 'required|in:percent,fixed',
+            'discount_value' => 'required|numeric|min:0',
+            'max_discount' => 'nullable|numeric|min:0',
+            'min_order_value' => 'nullable|numeric|min:0',
+            'quantity' => 'required|integer|min:0',
+            'start_date' => 'required|date',
+            'end_date' => 'required|date|after_or_equal:start_date',
+            'status' => 'required|in:0,1',
+        ]);
+
+        // Tìm voucher theo ID
+        $voucher = Voucher::find($input['voucher_id']);
+        // Cập nhật dữ liệu
+        $voucher->code = $input['code'];
+        $voucher->description = $input['description'];
+        $voucher->discount_type = $input['discount_type'];
+        $voucher->discount_value = $input['discount_value'];
+        $voucher->max_discount = $input['max_discount'];
+        $voucher->min_order_value = $input['min_order_value'];
+        $voucher->quantity = $input['quantity'];
+        $voucher->start_date = $input['start_date'];
+        $voucher->end_date = $input['end_date'];
+        $voucher->status = $input['status'];
+
+        $voucher->save();
+
+        return redirect('voucheradmin')->with('success', 'Cập nhật người dùng thành công.');
+    }
+
+    public function deleteVoucher(Request $request)
+    {
+        $voucher_id = $request->get('voucher_id');
+        $voucher = Voucher::destroy($voucher_id);
+
+        return redirect("voucheradmin")->withSuccess('You have delete susscess');
+    }
+
+    // user
     public function from_update_user(Request $request)
     {
         $user_id = $request->get('user_id');

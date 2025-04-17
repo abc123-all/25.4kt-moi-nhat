@@ -58,7 +58,9 @@
                                     <td>{{ $voucher->discount_value }}</td>
                                     <td>{{ $voucher->status ? 'Còn hiệu lực' : 'Hết hạn' }}</td>
                                     <td>
-                                        
+                                    <a href="{{route('admin.from_update_voucher',['voucher_id'=>$voucher->voucher_id])}}" class="btn btn-success btn-mini">Edit</a>
+                                            <!-- Form để xóa user -->
+                                            <a class="btn btn-danger btn-mini" href="{{route('admin.deleteVoucher',['voucher_id'=>$voucher->voucher_id])}}" class="btn btn-success btn-mini">Delete</a>  
                                     </td>
                                 </tr>
                                 @endforeach
