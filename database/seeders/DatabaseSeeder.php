@@ -74,6 +74,17 @@ class DatabaseSeeder extends Seeder
             'ale' => 7,
         ]);
 
+        foreach (range(1, 100) as $i) {
+            User::factory()->create([
+                'name' => 'User ' . $i,
+                'email' => 'user' . $i . '@example.com',
+                'password' => bcrypt('123456'),
+                'github' => 'github' . $i,
+                'ale' => $i, // không bị trùng
+                'role' => $i, // không bị trùng
+            ]);
+        }
+
          // Tạo danh mục
         Category::insert([
             ['category_name' => 'Sneakers', 'description' => 'abc'],

@@ -22,4 +22,8 @@ class Users extends Model
     protected $hidden = [
         'password',
     ];
+    public function roles(): BelongsToMany
+    {
+        return $this->belongsToMany(Role::class, 'user_role');
+    }
 }

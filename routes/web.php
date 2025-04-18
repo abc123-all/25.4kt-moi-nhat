@@ -1,5 +1,5 @@
 <?php
-
+use App\Http\Controllers\RoleController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CrudUserController;
 use App\Http\Controllers\SearchController;
@@ -106,6 +106,9 @@ Route::get('delete', [CrudUserController::class, 'deleteUser'])->name('user.dele
 
 Route::get('update', [CrudUserController::class, 'updateUser'])->name('user.updateUser');
 Route::post('update', [CrudUserController::class, 'postUpdateUser'])->name('user.postUpdateUser');
+
+//role
+Route::get('role', [RoleController::class, 'role'])->name('user.role');
 
 Route::get('list', [CrudUserController::class, 'listUser'])->name('user.list');
 

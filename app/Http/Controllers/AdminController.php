@@ -8,6 +8,7 @@ use App\Models\Voucher;
 use Hash;
 use Session;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash as FacadesHash;
 
 class AdminController extends Controller
 {
@@ -223,7 +224,7 @@ class AdminController extends Controller
             'email' => $data['email'],
             'phone' => $data['phone'],
             'address' => $data['address'],
-            'password' => Hash::make($data['password']),
+            'password' => FacadesHash::make($data['password']),
             'role' => $data['role'],
         ]);
         return redirect("usersadmin");

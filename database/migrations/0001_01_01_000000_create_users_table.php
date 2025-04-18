@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('github')->nullable();
-            $table->integer('ale')->unique();
+            $table->integer('ale');
             $table->string('avatar')->nullable()->default('default.jpg');;
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
@@ -38,6 +38,8 @@ return new class extends Migration
             $table->longText('payload');
             $table->integer('last_activity')->index();
         });
+
+        
     }
 
     /**

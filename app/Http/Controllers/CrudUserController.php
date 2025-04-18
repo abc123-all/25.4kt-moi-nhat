@@ -153,29 +153,29 @@ class CrudUserController extends Controller
        $user->email = $input['email'];
        $user->password = $input['password'];
 
-     // Kiểm tra và xử lý ảnh nếu có
-     if ($request->hasFile('avatar')) {
-        // Kiểm tra ảnh hợp lệ
-        $avatar = $request->file('avatar');
+    //  // Kiểm tra và xử lý ảnh nếu có
+    //  if ($request->hasFile('avatar')) {
+    //     // Kiểm tra ảnh hợp lệ
+    //     $avatar = $request->file('avatar');
         
-        // Đặt tên ảnh là thời gian hiện tại + extension
-        $avatarName = time() . '.' . $avatar->getClientOriginalExtension();
+    //     // Đặt tên ảnh là thời gian hiện tại + extension
+    //     $avatarName = time() . '.' . $avatar->getClientOriginalExtension();
 
-        if ($user->avatar) {
-            // Đường dẫn đến ảnh cũ
-            $oldAvatarPath = public_path('img/' . $user->avatar);
+    //     if ($user->avatar) {
+    //         // Đường dẫn đến ảnh cũ
+    //         $oldAvatarPath = public_path('img/' . $user->avatar);
             
-            // Kiểm tra nếu ảnh cũ tồn tại, thì xóa
-            if (file_exists($oldAvatarPath)) {
-                unlink($oldAvatarPath); // Xóa ảnh cũ
-            }
-        }
-        // Lưu ảnh vào thư mục public/img/
-        $avatar->move(public_path('img'), $avatarName);
+    //         // Kiểm tra nếu ảnh cũ tồn tại, thì xóa
+    //         if (file_exists($oldAvatarPath)) {
+    //             unlink($oldAvatarPath); // Xóa ảnh cũ
+    //         }
+    //     }
+    //     // Lưu ảnh vào thư mục public/img/
+    //     $avatar->move(public_path('img'), $avatarName);
 
-        // Cập nhật avatar trong database
-        $user->avatar = $avatarName;
-    }
+    //     // Cập nhật avatar trong database
+    //     $user->avatar = $avatarName;
+    // }
        $user->save();
 
         return redirect("list")->withSuccess('You have signed-in');
