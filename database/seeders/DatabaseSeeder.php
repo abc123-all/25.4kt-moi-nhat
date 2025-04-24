@@ -6,6 +6,8 @@ use App\Models\User;
 use App\Models\Category;
 use App\Models\Manufactures;
 use App\Models\Product;
+// use App\Models\RoleSeeder;
+// use App\Models\UserRole;
 use App\Models\Users;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -21,6 +23,9 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             VoucherSeeder::class,
+            RoleSeeder::class,
+            UserRoleSeeder::class,
+            UserSeeder::class,
         ]);
         // User::factory(10)->create();
         
@@ -74,16 +79,16 @@ class DatabaseSeeder extends Seeder
             'ale' => 7,
         ]);
 
-        foreach (range(1, 100) as $i) {
-            User::factory()->create([
-                'name' => 'User ' . $i,
-                'email' => 'user' . $i . '@example.com',
-                'password' => bcrypt('123456'),
-                'github' => 'github' . $i,
-                'ale' => $i, // không bị trùng
-                'role' => $i, // không bị trùng
-            ]);
-        }
+        // foreach (range(1, 100) as $i) {
+        //     User::factory()->create([
+        //         'name' => 'User ' . $i,
+        //         'email' => 'user' . $i . '@example.com',
+        //         'password' => bcrypt('123456'),
+        //         'github' => 'github' . $i,
+        //         'ale' => $i, // không bị trùng
+        //         'role' => $i, // không bị trùng
+        //     ]);
+        // }
 
          // Tạo danh mục
         Category::insert([

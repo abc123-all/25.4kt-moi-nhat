@@ -15,15 +15,11 @@ class Users extends Model
         'password',
         'phone',
         'address',
-        'role',
+        // 'role',
     ];
 
     // Nếu muốn ẩn password khi xuất ra JSON
     protected $hidden = [
         'password',
     ];
-    public function roles(): BelongsToMany
-    {
-        return $this->belongsToMany(Role::class, 'user_role');
-    }
 }

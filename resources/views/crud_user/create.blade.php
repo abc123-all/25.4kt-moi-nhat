@@ -39,6 +39,13 @@
                                 @endif
                             </div>
                             <div class="form-group mb-3">
+                                <input type="text" placeholder="Role" id="role" class="form-control" name="role"
+                                    required autofocus>
+                                @if ($errors->has('role'))
+                                <span class="text-danger">{{ $errors->first('role') }}</span>
+                                @endif
+                            </div>
+                            <div class="form-group mb-3">
                                 <input type="file" name="avatar" id="avatar"  class="form-control">
                                 @if ($errors->has('avatar'))
                                 <span class="text-danger">{{ $errors->first('avatar') }}</span>

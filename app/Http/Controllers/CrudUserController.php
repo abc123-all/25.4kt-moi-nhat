@@ -12,9 +12,10 @@ use Illuminate\Support\Facades\Auth;
 /**
  * CRUD User controller
  */
+
 class CrudUserController extends Controller
 {
-
+    const MAX_RECORDS = 10;
     /**
      * Login page
      */
@@ -68,6 +69,7 @@ class CrudUserController extends Controller
             'name' => 'required',
             'github' => 'required|String|max:255',
             'ale' => 'required|integer|min:0',
+            // 'role' => 'required|String|max:255',
             'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'email' => 'required|email|unique:users',
             'password' => 'required|min:6',
@@ -91,6 +93,7 @@ class CrudUserController extends Controller
             'email' => $data['email'],
             'github' => $data['github'],
             'ale' => $data['ale'],
+            // 'role' => $data['role'],
             'avatar' => isset($data['avatar']) ? $data['avatar'] : null,
             'password' => Hash::make($data['password'])
         ]);
@@ -140,6 +143,7 @@ class CrudUserController extends Controller
             'name' => 'required',
             'github' => 'required|String|max:255',
             'ale' => 'required|integer|min:0',
+            // 'role' => 'required|String|max:255',
             'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'email' => 'required|email|unique:users,id,'.$input['id'],
             'password' => 'required|min:6',
@@ -150,6 +154,7 @@ class CrudUserController extends Controller
        $user->name = $input['name'];
        $user->github = $input['github'];
        $user->ale = $input['ale'];
+    //    $user->role = $input['role'];
        $user->email = $input['email'];
        $user->password = $input['password'];
 
@@ -189,6 +194,7 @@ class CrudUserController extends Controller
         if(Auth::check()){
             $users = User::all();
             $products = Product::all();
+            $users = User::paginate(self::MAX_RECORDS);
             return view('crud_user.list', ['users' => $users],['products' => $products]);
         }
 

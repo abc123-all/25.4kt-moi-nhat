@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('github')->nullable();
             $table->integer('ale');
+            // $table->string('role')->nullable();
             $table->string('avatar')->nullable()->default('default.jpg');;
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
