@@ -9,7 +9,7 @@ use Illuminate\Support\Str;
 
 class UserSeeder extends Seeder
 {
-    const MAX_RECORDS = 100;
+    const MAX_RECORDS = 30;
     /**
      * Run the database seeds.
      */
