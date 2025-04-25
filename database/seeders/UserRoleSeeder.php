@@ -9,7 +9,7 @@ use Illuminate\Support\Str;
 
 class UserRoleSeeder extends Seeder
 {
-    const MAX_RECORDS = 30;
+    const MAX_RECORDS = 100;
     /**
      * Run the database seeds.
      */
